@@ -10,6 +10,8 @@ However, each specific module inherits the same core base model and
 extends it to its own needs.
 """
 
+import numpy as np
+
 from abc import abstractmethod
 from typing import Iterable, List
 
@@ -20,8 +22,8 @@ class ModelBaseName(etl.models.BaseModel):
         super().__init__(material, hsc_codes, grades)
 
 
-    def fit(self, *args, **kwargs) -> None:
-        pass
+    def fit(self, descriptions : np.ndarray) -> None:
+        descriptions = [ self._normalize(description).upper() for description in descriptions ]
 
 
     def predict(self, thresh : float, *args, **kwargs) -> Iterable[List]:
