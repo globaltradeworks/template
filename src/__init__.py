@@ -30,6 +30,8 @@ import yaml
 with open(os.path.join(CONFIG, "model.yaml"), "r") as f:
     MODEL_CONFIG = yaml.load(f, Loader = yaml.FullLoader)
 
+# hs code are always char(8) text format and parse always as text
+MODEL_CONFIG["primary"]["hs_codes"] = list(map(str, MODEL_CONFIG["primary"]["hs_codes"]))
 
 # init-time options registrations
 from src.model import ModelBaseName
