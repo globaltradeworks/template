@@ -25,6 +25,12 @@ class ModelBaseName(etl.models.BaseModel):
     def fit(self, descriptions : np.ndarray) -> None:
         descriptions = [ self._normalize(description).upper() for description in descriptions ]
 
+        # todo: after processing and fitting the model, set scores
+        # scores attribute is available as variable once the model fits
+        self.scores = None
+
+        return None
+
 
     def predict(self, thresh : float, *args, **kwargs) -> Iterable[List]:
         pass
