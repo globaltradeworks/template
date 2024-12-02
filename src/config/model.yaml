@@ -1,0 +1,16 @@
+about:
+  name: Model Name/Material Identification Name
+  desc: The configuration file is generic and is created to be used for
+    different material classification problems. The generic configuration
+    adheres to the module requirement - particularly ``material code``
+    which is the unique identifier as defined in the database and the grades
+    which follows the :mod:``TradeETL.MaterialGradeCluster`` data class.
+
+primary:
+  material: < material_code />
+  hs_codes:
+    - < 8 Digit Code-I />
+    - < 8 Digit Code-II />
+
+# the secondary clustering, i.e., the material grades are not available
+# define as per requirement in the child models based on this template repository
