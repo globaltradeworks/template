@@ -16,5 +16,20 @@ specific material classifical problem based on this template.
 # ? https://python-semver.readthedocs.io/en/latest/advanced/convert-pypi-to-semver.html
 __version__ = "v0.0.1.dev0"
 
+# initialize the directory and include the settings file
+# settings/configuration files are available module wide
+import os
+
+ROOT = os.path.abspath(os.path.dirname(__file__))
+CONFIG = os.path.join(ROOT, "config")
+
+# the model config is agnostic and is available as global variable
+# to all end user, this reduces `os.path.join(...)` repeated syntax
+import yaml
+
+with open(os.path.join(CONFIG, "model.yaml"), "r") as f:
+    MODEL_CONFIG = yaml.load(f, Loader = yaml.FullLoader)
+
+
 # init-time options registrations
 from src.model import ModelBaseName
