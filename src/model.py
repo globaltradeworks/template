@@ -12,7 +12,6 @@ extends it to its own needs.
 
 import numpy as np
 
-from abc import abstractmethod
 from typing import Iterable, List
 
 import TradeETL as etl # noqa: F401, F403 # pyright: ignore[reportMissingImports]
