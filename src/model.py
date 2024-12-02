@@ -22,7 +22,7 @@ class ModelBaseName(etl.models.BaseModel):
 
 
     def fit(self, descriptions : np.ndarray) -> None:
-        descriptions = [ self._normalize(description).upper() for description in descriptions ]
+        descriptions = self._normalize(descriptions)
 
         # todo: after processing and fitting the model, set scores
         # scores attribute is available as variable once the model fits
