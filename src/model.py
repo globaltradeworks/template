@@ -36,7 +36,7 @@ class ModelBaseName(etl.models.BaseModel):
 
     def predict(self, thresh : float, *args, **kwargs) -> Iterable[List]:
         bins = [0, 60, math.floor((thresh - 0.2 * thresh)), math.floor((thresh - 0.1 * thresh)), thresh, 100]
-        
+
         # todo: also create additional control metrics and set as class property
         # like the fuzzy score remarks which can be captured by the module mixer
         self.fuzzy_remarks = pd.cut(self.scores, bins = bins, bins = ["R", "L", "M", "N", "H"])
