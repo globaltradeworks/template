@@ -14,3 +14,8 @@ primary:
 
 # the secondary clustering, i.e., the material grades are not available
 # define as per requirement in the child models based on this template repository
+
+
+# modularizing and bifurcation allows the model to set a threshold value
+# seperately for each material (and its subgrades), this is now available in config
+thresh: < threshold_value />
