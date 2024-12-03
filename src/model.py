@@ -20,8 +20,8 @@ from typing import Iterable, List
 import TradeETL as etl # noqa: F401, F403 # pyright: ignore[reportMissingImports]
 
 class ModelBaseName(etl.models.BaseModel):
-    def __init__(self, material : str, hsc_codes : Iterable[str], grades : Iterable[dict] = []) -> None:
-        super().__init__(material, hsc_codes, grades)
+    def __init__(self, material : str, hs_codes : Iterable[str], grades : Iterable[dict] = []) -> None:
+        super().__init__(material, hs_codes, grades)
 
 
     def fit(self, descriptions : np.ndarray, *args, **kwargs) -> None:
