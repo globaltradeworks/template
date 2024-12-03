@@ -25,15 +25,22 @@ class ModelBaseName(etl.models.BaseModel):
 
 
     def fit(self, descriptions : np.ndarray, *args, **kwargs) -> None:
-        self.descriptions = descriptions
+        self.descriptions = descriptions # assert ndim == 1
 
         # ? in case of multi-modal approach add the additional details
-        hs_codes = kwargs.get("hs_codes", np.array([]))
+        # since the class object has to be initialized with the hs_codes
+        # we can take privileage of the same and add dummy hs code which is
+        # the first value from the ``self.hs_codes`` thus, the score can be
+        # always triggered with hs code in the self.hs_code attribute
+        _n_rows, _dummy_hs_code = self.descriptions.shape[0], self.hs_codes[0]
+        hs_codes = kwargs.get("hs_codes", np.array([_dummy_hs_code] * _n_rows))
 
         # ? the manufacturer are added and set as class attribute as
         # the manufacturer are further required for finding/scoring the secondary cluster
         self.manufacturers = kwargs.get("manufacturers", np.array([]))
 
+        # todo: frame the logic in such a way that the fit function works
+        # when data records are passed w/o hs_codes or when with the data
         # todo: after processing and fitting the model, set scores
         # scores attribute is available as variable once the model fits
         self.scores = None
