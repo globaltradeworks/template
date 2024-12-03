@@ -16,6 +16,7 @@ primary:
 # define as per requirement in the child models based on this template repository
 
 
-# modularizing and bifurcation allows the model to set a threshold value
+# ? modularizing and bifurcation allows the model to set a threshold value
 # seperately for each material (and its subgrades), this is now available in config
+# ? typically, the threshold should be determined from a seperate lr model
 thresh: < threshold_value />
