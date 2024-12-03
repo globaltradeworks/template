@@ -29,7 +29,10 @@ class ModelBaseName(etl.models.BaseModel):
 
         # ? in case of multi-modal approach add the additional details
         hs_codes = kwargs.get("hs_codes", np.array([]))
-        manufacturers = kwargs.get("manufacturers", np.array([]))
+
+        # ? the manufacturer are added and set as class attribute as
+        # the manufacturer are further required for finding/scoring the secondary cluster
+        self.manufacturers = kwargs.get("manufacturers", np.array([]))
 
         # todo: after processing and fitting the model, set scores
         # scores attribute is available as variable once the model fits
