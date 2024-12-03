@@ -28,6 +28,10 @@ class ModelBaseName(etl.models.BaseModel):
         # scores attribute is available as variable once the model fits
         self.scores = None
 
+        # todo: also create additional control metrics and set as class property
+        # like the fuzzy score remarks which can be captured by the module mixer
+        self.fuzzy_remarks = None
+
         return None
 
 
