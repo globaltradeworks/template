@@ -33,7 +33,3 @@ class ModelBaseName(etl.models.BaseModel):
 
     def predict(self, thresh : float, *args, **kwargs) -> Iterable[List]:
         pass
-
-
-    def modelname(self) -> str:
-        return self.__class__.__name__
