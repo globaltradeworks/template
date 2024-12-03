@@ -10,7 +10,10 @@ However, each specific module inherits the same core base model and
 extends it to its own needs.
 """
 
+import math
+
 import numpy as np
+import pandas as pd
 
 from typing import Iterable, List
 
@@ -22,18 +25,24 @@ class ModelBaseName(etl.models.BaseModel):
 
 
     def fit(self, descriptions : np.ndarray) -> None:
-        descriptions = self._normalize(descriptions)
+        self.descriptions = self._normalize(descriptions)
 
         # todo: after processing and fitting the model, set scores
         # scores attribute is available as variable once the model fits
         self.scores = None
 
-        # todo: also create additional control metrics and set as class property
-        # like the fuzzy score remarks which can be captured by the module mixer
-        self.fuzzy_remarks = None
-
         return None
 
 
     def predict(self, thresh : float, *args, **kwargs) -> Iterable[List]:
-        pass
+        bins = [0, 60, math.floor((thresh - 0.2 * thresh)), math.floor((thresh - 0.1 * thresh)), thresh, 100]
+        
+        # todo: also create additional control metrics and set as class property
+        # like the fuzzy score remarks which can be captured by the module mixer
+        self.fuzzy_remarks = pd.cut(self.scores, bins = bins, bins = ["R", "L", "M", "N", "H"])
+
+        # typically there is a true-value and the false-value is always none
+        # the true value represents the primary and secondary cluster (if exists) unique code
+        trueval, falseval = ("code", None), (None, None)
+
+        return np.array([ trueval if score > thresh else falseval for score in self.scores ])
