@@ -24,8 +24,12 @@ class ModelBaseName(etl.models.BaseModel):
         super().__init__(material, hsc_codes, grades)
 
 
-    def fit(self, descriptions : np.ndarray) -> None:
+    def fit(self, descriptions : np.ndarray, *args, **kwargs) -> None:
         self.descriptions = self._normalize(descriptions)
+
+        # ? in case of multi-modal approach add the additional details
+        hs_codes = kwargs.get("hs_codes", np.array([]))
+        manufacturers = kwargs.get("manufacturers", np.array([]))
 
         # todo: after processing and fitting the model, set scores
         # scores attribute is available as variable once the model fits
@@ -39,7 +43,7 @@ class ModelBaseName(etl.models.BaseModel):
 
         # todo: also create additional control metrics and set as class property
         # like the fuzzy score remarks which can be captured by the module mixer
-        self.fuzzy_remarks = pd.cut(self.scores, bins = bins, bins = ["R", "L", "M", "N", "H"])
+        self.fuzzy_remarks = pd.cut(self.scores, bins = bins, labels = ["R", "L", "M", "N", "H"])
 
         # typically there is a true-value and the false-value is always none
         # the true value represents the primary and secondary cluster (if exists) unique code
