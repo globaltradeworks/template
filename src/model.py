@@ -25,7 +25,7 @@ class ModelBaseName(etl.models.BaseModel):
 
 
     def fit(self, descriptions : np.ndarray, *args, **kwargs) -> None:
-        self.descriptions = self._normalize(descriptions)
+        self.descriptions = descriptions
 
         # ? in case of multi-modal approach add the additional details
         hs_codes = kwargs.get("hs_codes", np.array([]))
